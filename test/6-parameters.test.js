@@ -1,12 +1,14 @@
+import { objectExpression } from "@babel/types";
+
 test('can be triggered when the incoming argument is undefined', () => {
   function getName(name = 'Mercury') {
     return name
   }
 
-  expect(getName('Aaron')).toBe( /*ENTER YOUR GUESS HERE*/ )
-  expect(getName(undefined)).toBe( /*ENTER YOUR GUESS HERE*/ )
-  expect(getName(null)).toBe( /*ENTER YOUR GUESS HERE*/ )
-  expect(getName()).toBe( /*ENTER YOUR GUESS HERE*/ )
+  expect(getName('Aaron')).toBe('Aaron')
+  expect(getName(undefined)).toBe('Mercury')
+  expect(getName(null)).toBe(null)
+  expect(getName()).toBe('Mercury')
 })
 
 test(`aren't included in arguments`, () => {
@@ -14,9 +16,9 @@ test(`aren't included in arguments`, () => {
     return arguments.length
   }
 
-  expect(getName('Aaron')).toBe( /*ENTER YOUR GUESS HERE*/ )
-  expect(getName(null)).toBe( /*ENTER YOUR GUESS HERE*/ )
-  expect(getName()).toBe( /*ENTER YOUR GUESS HERE*/ )
+  expect(getName('Aaron')).toBe(1)
+  expect(getName(null)).toBe(1)
+  expect(getName()).toBe(0)
 })
 
 test('can trigger a function call', () => {
@@ -31,11 +33,11 @@ test('can trigger a function call', () => {
     return 'Mercury'
   }
 
-  expect(triggerCount).toBe( /*ENTER YOUR GUESS HERE*/ )
-  expect(getName('Aaron')).toBe( /*ENTER YOUR GUESS HERE*/ )
-  expect(getName()).toBe( /*ENTER YOUR GUESS HERE*/ )
-  expect(getName(undefined)).toBe( /*ENTER YOUR GUESS HERE*/ )
-  expect(triggerCount).toBe( /*ENTER YOUR GUESS HERE*/ )
+  expect(triggerCount).toBe(0)
+  expect(getName('Aaron')).toBe('Aaron')
+  expect(getName()).toBe('Mercury')
+  expect(getName(undefined)).toBe('Mercury')
+  expect(triggerCount).toBe(2)
 })
 
 test('catch non-specified params', () => {
@@ -43,13 +45,13 @@ test('catch non-specified params', () => {
     return others
   }
 
-  expect(resty().length).toBe( /*ENTER YOUR GUESS HERE*/ )
-  expect(resty(1).length).toBe( /*ENTER YOUR GUESS HERE*/ )
-  expect(resty(1, 2).length).toBe( /*ENTER YOUR GUESS HERE*/ )
-  expect(resty(1, 2, 3).length).toBe( /*ENTER YOUR GUESS HERE*/ )
+  expect(resty().length).toBe(0)
+  expect(resty(1).length).toBe(0)
+  expect(resty(1, 2).length).toBe(0)
+  expect(resty(1, 2, 3).length).toBe(1)
   expect(
     resty(1, 2, 3, undefined, 5, undefined, 7, undefined, 9, 10).length,
-  ).toBe( /*ENTER YOUR GUESS HERE*/ )
+  ).toBe(8)
 })
 
 test('has a different length than `arguments`', () => {
@@ -57,13 +59,13 @@ test('has a different length than `arguments`', () => {
     return others.length === arguments.length
   }
 
-  expect(resty()).toBe( /*ENTER YOUR GUESS HERE*/ )
-  expect(resty(1)).toBe( /*ENTER YOUR GUESS HERE*/ )
-  expect(resty(1, 2)).toBe( /*ENTER YOUR GUESS HERE*/ )
-  expect(resty(1, 2, 3)).toBe( /*ENTER YOUR GUESS HERE*/ )
+  expect(resty()).toBe(true)
+  expect(resty(1)).toBe(false)
+  expect(resty(1, 2)).toBe(false)
+  expect(resty(1, 2, 3)).toBe(false)
   expect(
     resty(1, 2, 3, undefined, 5, undefined, 7, undefined, 9, 10),
-  ).toBe( /*ENTER YOUR GUESS HERE*/ )
+  ).toBe(false)
 })
 
 test('is an actual array, unlike arguments', () => {
@@ -80,9 +82,9 @@ test('is an actual array, unlike arguments', () => {
 
   expect(
     Object.getPrototypeOf(args) === Object.getPrototypeOf(rests),
-  ).toBe( /*ENTER YOUR GUESS HERE*/ )
-  expect(args.splice).toBe( /*ENTER YOUR GUESS HERE*/ )
-  expect(Object.getPrototypeOf(rests)).toBe( /*ENTER YOUR GUESS HERE*/ )
+  ).toBe(false)
+  expect(args.splice).toBe(undefined)
+  expect(Object.getPrototypeOf(rests)).toBe(Array.prototype)
   expect(rests.splice).toBeDefined()
   expect(rests.splice).toBe(Array.prototype.splice)
 })
@@ -92,10 +94,10 @@ test('it can default all arguments, optionally', () => {
   // all args to be optional
 
   function myFunction({
-    name,
-    age,
-    favoriteBand
-  }) {
+    name = '',
+    age = '',
+    favoriteBand = ''
+  } = {name: 'Axel', age: '37', favoriteBand: 'Taylor Swift'}) {
     expect(name).toBeDefined()
     expect(age).toBeDefined()
     expect(favoriteBand).toBeDefined()
@@ -113,6 +115,7 @@ test('it can default all arguments, optionally', () => {
   myFunction({
     name: 'Axel'
   })
-  myFunction({})
+  myFunction({
+  })
   myFunction()
 })

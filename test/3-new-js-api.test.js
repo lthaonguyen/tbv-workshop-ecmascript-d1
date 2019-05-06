@@ -20,14 +20,14 @@ test(`should be able to take an array-like object and convert it into an array`,
   expect(result).toEqual(['a', 'b', 'c'])
 })
 
-test.skip(`should be easier to fill an array with values`, () => {
+test(`should be easier to fill an array with values`, () => {
   const originalArray = new Array(5)
   // create a variable called `result` and assign it to an array that's filled with 3s except for the first item.
-  const result = 'your implementation goes here'
+  let result = originalArray.fill(3, 1)
   expect(result).toEqual([, 3, 3, 3, 3])
 })
 
-test.skip(`should be easy to copy properties from one object to another`, () => {
+test(`should be easy to copy properties from one object to another`, () => {
   const source1 = {
     a: {
       b: 'c',
@@ -55,7 +55,7 @@ test.skip(`should be easy to copy properties from one object to another`, () => 
     p: ['x', 'y', 'z'],
   }
   // merge the sources into the target using Object.assign
-  let result = 'your implementation #1 goes here'
+  let result = Object.assign(target, source1, source2, source3)
 
   expect(result).toEqual({
     a: {
