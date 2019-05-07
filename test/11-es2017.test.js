@@ -1,17 +1,18 @@
-test.skip('String.prototype.padStart saves us from left-pad-gate', () => {
+test('String.prototype.padStart saves us from left-pad-gate', () => {
   const originalString = 'Worlds Finest'
   // call padStart on this string to make the test pass
-  const result = originalString
+  const result = originalString.padStart(originalString.length + 4, ' ')
   expect(result).toBe('    Worlds Finest')
 })
 
-test.skip('String.prototype.padEnd (and padStart) can be given a string to pad with', () => {
+test('String.prototype.padEnd (and padStart) can be given a string to pad with', () => {
   const originalString = 'Stronger Together'
   // call padEnd on this string to make the test pass
+  const result = originalString.padEnd(originalString.length + 10, '-123-123-1')
   expect(result).toBe('Stronger Together-123-123-1')
 })
 
-test.skip('Object.values gets just the values of an object', () => {
+test('Object.values gets just the values of an object', () => {
   const show = {
     title: 'Supergirl',
     seasons: 1.2,
@@ -26,6 +27,7 @@ test.skip('Object.values gets just the values of an object', () => {
     ],
   }
   // get the values of the show object as an array
+  const result = Object.values(show)
   expect(result).toEqual([
     'Supergirl',
     1.2,
@@ -41,7 +43,7 @@ test.skip('Object.values gets just the values of an object', () => {
   ])
 })
 
-test.skip('Object.entries gives an array of arrays as [key, value]', () => {
+test('Object.entries gives an array of arrays as [key, value]', () => {
   const show = {
     title: 'The Flash',
     seasons: 2.2,
@@ -56,6 +58,7 @@ test.skip('Object.entries gives an array of arrays as [key, value]', () => {
     ],
   }
   // get a [key, value] array of the show object
+  const result = Object.entries(show)
   expect(result).toEqual([
     ['title', 'The Flash'],
     ['seasons', 2.2],
