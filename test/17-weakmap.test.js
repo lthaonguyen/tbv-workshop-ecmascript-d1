@@ -8,6 +8,8 @@ test('has a set method', () => {
   }
   // Create a new WeakMap called 'myMap'
   // Add a new entry. Use key as the key and values as the value
+  const myMap = new WeakMap()
+  myMap.set(key)
   expect(myMap.has(key)).toBe(true)
 })
 
