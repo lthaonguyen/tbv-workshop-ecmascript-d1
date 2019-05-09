@@ -16,8 +16,7 @@ test('can replace traditional functions #2', () => {
   const nums = [2, 5, 10]
   // Replace the 'function' in this 'map' call with an arrow function.
   // Hint: you shouldn't have any braces or 'return' after you are done
-  const squareCallback = num => num * num
-  const squares = nums.map(squareCallback)
+  const squares = nums.map(num => num * num)
 
   expect(squares.shift()).toBe(4)
   expect(squares.shift()).toBe(25)
