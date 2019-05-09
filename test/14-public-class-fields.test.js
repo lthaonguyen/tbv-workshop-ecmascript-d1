@@ -1,4 +1,4 @@
-test('public class fields help us avoid .bind-ing everything', () => {
+test.skip('public class fields help us avoid .bind-ing everything', () => {
   class FakeReactComponent {
     constructor(props) {
       this.props = props
@@ -10,7 +10,7 @@ test('public class fields help us avoid .bind-ing everything', () => {
     constructor(...args) {
       super(...args)
       // we don't want to have to do this...
-      //this.handleClick = this.handleClick.bind(this) // sad :-(
+      this.handleClick = this.handleClick.bind(this) // sad :-(
     }
     // convert this to a public class field so it's autobound
     handleClick({
