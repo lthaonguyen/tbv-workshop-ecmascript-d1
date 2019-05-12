@@ -5,8 +5,8 @@ describe('timerGame', () => {
     const timerGame = require('../timerGame');
     timerGame();
 
-    expect(setTimeout.mock.calls.length).toBe( /* ENTER YOUR ANSWER HERE */ 1);
-    expect(setTimeout.mock.calls[0][1]).toBe( /* ENTER YOUR ANSWER HERE */ );
+    expect(setTimeout.mock.calls.length).toBe(1);
+    expect(setTimeout.mock.calls[0][1]).toBe(1000);
   });
 
   it('calls the callback after 1 second via runAllTimers', () => {
@@ -23,7 +23,7 @@ describe('timerGame', () => {
 
     // Now our callback should have been called!
     expect(callback).toBeCalled();
-    expect(callback.mock.calls.length).toBe( /* ENTER YOUR ANSWER HERE */ );
+    expect(callback.mock.calls.length).toBe(1);
   });
 
   it('calls the callback after 1 second via advanceTimersByTime', () => {
@@ -40,6 +40,6 @@ describe('timerGame', () => {
 
     // Now our callback should have been called!
     expect(callback).toBeCalled();
-    expect(callback.mock.calls.length).toBe( /* ENTER YOUR ANSWER HERE */ );
+    expect(callback.mock.calls.length).toBe(1);
   });
 });

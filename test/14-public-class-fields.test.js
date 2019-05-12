@@ -1,4 +1,4 @@
-test.skip('public class fields help us avoid .bind-ing everything', () => {
+test('public class fields help us avoid .bind-ing everything', () => {
   class FakeReactComponent {
     constructor(props) {
       this.props = props
